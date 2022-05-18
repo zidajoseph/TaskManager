@@ -1,24 +1,34 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Model tasks
 
-Things you may want to cover:
+| Colums      | Description |
+| ----------- | ----------- |
+| name        | string      |
+| content     | string      |
+| expiry_date | string      |
+| status      | boolean     |
+| priority    | string      |
+| user_id     | foreign_key |
 
-* Ruby version
+### Model users
 
-* System dependencies
+| Colums   | Description |
+| -------- | ----------- |
+| name     | string      |
+| email    | string      |
+| password | string      |
+| is_admin | boolean     |
 
-* Configuration
+### labels
 
-* Database creation
+| Colums | Description |
+| ------ | ----------- |
+| name   | string      |
 
-* Database initialization
+### labellings
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| Colums    | Description |
+| --------- | ----------- |
+| task_id   | foreign_key |
+| label_id  | foreign_key |

@@ -1,0 +1,10 @@
+<h1>Task detail </h1>
+<p><%= notice %></p>
+<p>Name: <%= @task.name %></p>
+
+<p>Content: <%= @task.content %></p>
+
+<p>
+    <%= link_to 'Edit', edit_task_path(@task) %>
+    <%= link_to 'Back', tasks_path %>
+</p>

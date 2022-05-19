@@ -33,4 +33,17 @@ RSpec.describe 'Task management function', type: :system do
        end
      end
   end
+  describe 'Testing task sorting by creation date and time' do
+    context 'Testing if lastest task is first displayed' do
+      it 'Sorting by creation date' do
+       task = FactoryBot.create(:task, name: 'task1', content: 'content1')
+       task = FactoryBot.create(:task, name: 'task2', content: 'content2')
+       task = FactoryBot.create(:task, name: 'task3', content: 'content3')
+       task = FactoryBot.create(:task, name: 'task4', content: 'content4')
+       visit tasks_path
+       task_test = all('td')
+       expect(task_test[0]).to have_content 'task4'
+      end
+    end
+ end
 end

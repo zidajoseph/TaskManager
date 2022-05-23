@@ -4,6 +4,12 @@
 
 <p>Content: <%= @task.content %></p>
 
+<p>Dead_line: <%= @task.dead_line.strftime("%Y-%m-%d") %></p>
+
+<p>Priority: <%= @task.priority %></p>
+
+<p>Status: <%= @task.status %></p>
+
 <p>
     <%= link_to 'Edit', edit_task_path(@task) %>
     <%= link_to 'Back', tasks_path %>

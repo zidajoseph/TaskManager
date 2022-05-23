@@ -20,6 +20,18 @@
       <%= form.label :content %>
       <%= form.text_field :content %>
     </div>
+    <div class="task_dead_line">
+      <%= form.label :dead_line %>
+      <%= form.date_select :dead_line %>
+    </div>
+    <div class="task_status">
+      <%= form.label :status %>
+      <%= form.select :status, Task.statuses.keys.to_a %>
+    </div>
+    <div class="task_priority">
+      <%= form.label :priority %>
+      <%= form.select :priority, Task.priorities.keys.to_a %>
+    </div>
     <%= form.submit %>
 <% end %>
 <%= link_to 'Back', tasks_path %>

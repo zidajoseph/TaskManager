@@ -1,6 +1,6 @@
-<h1>Task detail </h1>
-<p><%= notice %></p>
-<p>Name: <%= @task.name %></p>
+<h2 class="card-title">Task detail</h2>
+
+<p class="card-text">Name: <%= @task.name %></p>
 
 <p>Content: <%= @task.content %></p>
 
@@ -11,6 +11,6 @@
 <p>Status: <%= @task.status %></p>
 
 <p>
-    <%= link_to 'Edit', edit_task_path(@task) %>
-    <%= link_to 'Back', tasks_path %>
+    <%= link_to 'Edit', edit_task_path(@task), class:'btn btn-outline-success' %>
+    <%= link_to 'Back', tasks_path, class:'btn btn-outline-primary' %>
 </p>

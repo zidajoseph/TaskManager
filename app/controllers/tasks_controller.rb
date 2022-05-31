@@ -2,7 +2,26 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    if params[:sort_expired]
+      @tasks = Task.all.order(dead_line: :desc).page(params[:page])
+    elsif params[:sort_priority]
+      @tasks = Task.all.order(priority: :asc).page(params[:page])
+    else
+      @tasks = Task.all.order(created_at: :desc).page(params[:page])
+    end
+
+    if params[:name].present? && params[:number].present?
+      # return search results where both name and status are valid
+      @tasks = Task.search_name(params[:name]).search_status(params[:number]).page(params[:page])
+      # When the only parameter passed is the task name
+    elsif params[:name].present?
+      @tasks = Task.search_name(params[:name]).page(params[:page])
+      # When the only parameter passed is status
+    elsif params[:number].present?
+      @tasks = Task.search_status(params[:number]).page(params[:page])
+    end
+
+
   end
 
   def show
@@ -40,7 +59,7 @@ class TasksController < ApplicationController
 
   private 
   def task_params
-    params.require(:task).permit(:name, :content)
+    params.require(:task).permit(:name, :content, :dead_line, :status, :priority)
   end
 
   def set_task

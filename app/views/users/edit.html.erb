@@ -1,0 +1,26 @@
+<%= form_with(model: @user, local: true, url: user_path, name: "sentMessage", id: "contactForm") do |f| %>
+    <p>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </p>
+    
+  
+    <p>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+    </p>
+
+    <p>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+    </p>
+
+    <p>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+    </p>
+  
+    <p>
+        <%= f.submit "Edit my account" %>
+    </p>
+  <% end %>

@@ -31,7 +31,6 @@
                 <li class="nav-item"><%= link_to "Profile", user_path(current_user.id), class: "nav-link px-lg-3 py-3 py-lg-4" %></li>
                 <li class="nav-item"><%= link_to "Logout", session_path(current_user.id), method: :delete, class: "nav-link px-lg-3 py-3 py-lg-4" %></li>
                 
-
                 <% else %>
                 <%= link_to "Sign up", new_user_path, class: "nav-link px-lg-3 py-3 py-lg-4" %>
                 <%= link_to "Login", new_session_path, class: "nav-link px-lg-3 py-3 py-lg-4" %>
@@ -39,6 +38,16 @@
               </ul>
           </div>
       </div>
+      <nav>
+        <ul class="pagination justify-content-end mt-3">
+          <% if logged_in? %>
+            <li class="nav-link px-lg-3 py-3 py-lg-4 text-light"> Hi <%= current_user.name %></li>
+            <% if current_user.admin? %>
+              <li class="nav-item"><%= link_to "Management", admin_users_path, class: "nav-link px-lg-3 py-3 py-lg-4" %></li>
+            <% end %>
+          <% end %>  
+        </ul>
+      </nav>
     </nav>
     <div class ="container p-5 ">
       

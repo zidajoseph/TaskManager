@@ -33,21 +33,26 @@
                 
 
                 <% else %>
-                <%= link_to "Sign up", new_user_path %>
-                <%= link_to "Login", new_session_path %>
-                <% end %>
-
-                
+                <%= link_to "Sign up", new_user_path, class: "nav-link px-lg-3 py-3 py-lg-4" %>
+                <%= link_to "Login", new_session_path, class: "nav-link px-lg-3 py-3 py-lg-4" %>
+                <% end %>                
               </ul>
           </div>
       </div>
     </nav>
-    <div class ="container p-5">
+    <div class ="container p-5 ">
       
-      <div class="card p-5">
+      <div class="card p-5 mt-5">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-primary alert-dismissible fade show mx-5 mt-4 border border-primary" role="alert">
         <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-        <%= yield %>
+          <button type="button" class="close" 
+              data-dismiss="alert">
+              <h6>Close</h6>
+          </button>
+        </div> 
+      <% end %>
+          <%= yield %>
       </div>
       
     </div>

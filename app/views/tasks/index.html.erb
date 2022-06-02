@@ -6,7 +6,7 @@
   <%= form.text_field :name, class:'form-control rounded mr-3', placeholder: 'Search ...' %>
   <%= form.submit 'Search', class:'btn btn-outline-primary mr-3' %>
   <%= form.label :Status, class:'mr-3' %>
-  <%= form.select :number, Task.statuses.keys.to_a, { include_blank:'Please select'} %>
+  <%= form.select :number, Task.statuses.keys.to_a, { include_blank:'Please select'}, class:'form-control rounded mr-3' %>
 <% end %>
 
 
@@ -40,8 +40,8 @@
     <% end %>
   </tbody>
 </table>
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-end">
+<nav>
+  <ul class="pagination justify-content-end mt-3">
     <li class="page-item"><%= paginate @tasks %></li>
   </ul>
 </nav>

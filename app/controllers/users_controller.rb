@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
     skip_before_action :login_required, only: [:new, :create, :edit]
+    
+    def index
+      @users = User.all
+    end
+    
     def new
       if logged_in?
         flash[:notice] = 'New registrations must be logged out of the app.'
@@ -21,7 +26,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
+      @user = User.find(params[:id])
+      @tasks = @user.tasks.all
         if @user.id != current_user.id
           redirect_to tasks_path, notice: "Can't access this page"
         end
@@ -53,4 +59,9 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password,
                                     :password_confirmation)
     end
+
+    def set_user
+      @user = User.find(params[:id])
+    end
+
 end

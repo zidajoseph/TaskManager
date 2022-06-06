@@ -8,11 +8,19 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 6 }
     
     before_destroy :admin_exist_check
+    before_update :admin_update_exist
     
     def admin_exist_check
         if User.where(admin: true).count <= 1 && self.admin == true
           throw(:abort)
         end
     end
+
+    def admin_update_exist
+      if User.where(admin: true).count == 1 && self.admin == false
+        throw(:abort)
+      end
+    end
+  
     
 end

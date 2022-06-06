@@ -46,7 +46,7 @@ class Admin::UsersController < ApplicationController
 
     def destroy
       @user = User.find(params[:id])
-      if current_user.id = @user.id
+      if current_user.id == @user.id
         redirect_to admin_users_path, notice: "Can't delete current user !"
       elsif
         if @user.destroy

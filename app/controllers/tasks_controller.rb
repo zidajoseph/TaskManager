@@ -20,6 +20,8 @@ class TasksController < ApplicationController
       # When the only parameter passed is status
     elsif params[:number].present?
       @tasks = current_user.tasks.search_status(params[:number]).page(params[:page])
+    elsif params[:label_id].present?
+      @tasks = current_user.tasks.all.joins(:labels).where(labels: { id: params[:label_id] })
     end
 
 
@@ -61,7 +63,7 @@ class TasksController < ApplicationController
 
   private 
   def task_params
-    params.require(:task).permit(:name, :content, :dead_line, :status, :priority)
+    params.require(:task).permit(:name, :content, :dead_line, :status, :priority,  { label_ids: [] })
   end
 
   def set_task

@@ -2,23 +2,24 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
+
     if params[:sort_expired]
-      @tasks = Task.all.order(dead_line: :desc).page(params[:page])
+      @tasks = current_user.tasks.all.order(dead_line: :desc).page(params[:page])
     elsif params[:sort_priority]
-      @tasks = Task.all.order(priority: :asc).page(params[:page])
+      @tasks = current_user.tasks.all.order(priority: :asc).page(params[:page])
     else
-      @tasks = Task.all.order(created_at: :desc).page(params[:page])
+      @tasks = current_user.tasks.all.order(created_at: :desc).page(params[:page])
     end
 
     if params[:name].present? && params[:number].present?
       # return search results where both name and status are valid
-      @tasks = Task.search_name(params[:name]).search_status(params[:number]).page(params[:page])
+      @tasks = current_user.tasks.search_name(params[:name]).search_status(params[:number]).page(params[:page])
       # When the only parameter passed is the task name
     elsif params[:name].present?
-      @tasks = Task.search_name(params[:name]).page(params[:page])
+      @tasks = current_user.tasks.search_name(params[:name]).page(params[:page])
       # When the only parameter passed is status
     elsif params[:number].present?
-      @tasks = Task.search_status(params[:number]).page(params[:page])
+      @tasks = current_user.tasks.search_status(params[:number]).page(params[:page])
     end
 
 
@@ -33,7 +34,8 @@ class TasksController < ApplicationController
   end  
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
+    # @task = Task.new(task_params)
     if @task.save
       redirect_to tasks_path, notice: "Tache cree avec success"
     else

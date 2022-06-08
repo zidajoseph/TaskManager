@@ -21,7 +21,7 @@ class TasksController < ApplicationController
     elsif params[:number].present?
       @tasks = current_user.tasks.search_status(params[:number]).page(params[:page])
     elsif params[:label_id].present?
-      @tasks = current_user.tasks.all.joins(:labels).where(labels: { id: params[:label_id] })
+      @tasks = current_user.tasks.all.joins(:labels).where(labels: { id: params[:label_id] }).page(params[:page])
     end
 
 
@@ -50,7 +50,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to task_path(@task.id), notice: "J'ai modifié la tache !"
+      redirect_to task_path(@task.id), notice: "Task updated !"
     else
       render :edit
     end

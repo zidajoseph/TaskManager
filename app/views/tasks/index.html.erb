@@ -7,6 +7,7 @@
   <%= form.submit 'Search', class:'btn btn-outline-primary mr-3' %>
   <%= form.label :Status, class:'mr-3' %>
   <%= form.select :number, Task.statuses.keys.to_a, { include_blank:'Please select'}, class:'form-control rounded mr-3' %>
+  <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: 'choose label' }) %>
 <% end %>
 
 
@@ -35,7 +36,7 @@
       <td><%= task.status %></td>
       <td><%= task.user.name %></td>
       <td>
-        <% @task.labels.each do |label| %>
+        <% task.labels.each do |label| %>
           <%= label.name %>
         <% end %>
       </td>
